@@ -10,6 +10,7 @@ const MovieDetailsPage = () => {
     try {
       const fetchData = async () => {
         const data = await fetchMoviesById(movieId);
+        console.log(data);
         setMovie(data);
       };
       fetchData();
@@ -22,19 +23,25 @@ const MovieDetailsPage = () => {
     return <h2>Loading ...</h2>;
   }
 
+  const { title, release_date, vote_average, backdrop_path, overview, genres } =
+    movie;
+
+  const genreNames = genres.map((genre) => genre.name).join(" ");
+
   return (
     <div>
       <h1>
-        {movie.title} ({movie.release_date.split("-")[0]})
+        {title} ({release_date.split("-")[0]})
       </h1>
       <img
-        src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-        alt={movie.title}
+        src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+        alt={title}
       />
-      <p>User Score: {(movie.vote_average * 10).toFixed(0)}%</p>
+      <p>User Score: {(vote_average * 10).toFixed(0)}%</p>
       <h2>Overview</h2>
-      <p>{movie.overview}</p>
-      <h2></h2>
+      <p>{overview}</p>
+      <h2>Genres</h2>
+      <p>{genreNames}</p>
     </div>
   );
 };
