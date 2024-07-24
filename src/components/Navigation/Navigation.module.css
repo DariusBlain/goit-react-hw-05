@@ -1,0 +1,21 @@
+.header {
+  background-color: rgb(161, 161, 255);
+  padding: 24px;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.link {
+  color: azure;
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.active {
+  color: blue;
+}

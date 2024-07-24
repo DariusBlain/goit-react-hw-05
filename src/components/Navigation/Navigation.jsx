@@ -12,7 +12,7 @@ const Navigation = () => {
         <ul className={s.nav}>
           <li>
             <NavLink className={buildLinkClass} to="/">
-              Home Page
+              Home
             </NavLink>
           </li>
           <li>

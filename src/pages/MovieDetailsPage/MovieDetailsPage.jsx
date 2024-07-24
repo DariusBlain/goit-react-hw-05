@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { fetchMoviesById } from "../../api";
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage = ({ handleClickBack }) => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    if (!movieId) return;
+    const fetchData = async () => {
+      try {
         const data = await fetchMoviesById(movieId);
-        console.log(data);
         setMovie(data);
-      };
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, [movieId]);
 
   if (!movie) {
@@ -27,22 +29,39 @@ const MovieDetailsPage = () => {
     movie;
 
   const genreNames = genres.map((genre) => genre.name).join(" ");
-
   return (
-    <div>
-      <h1>
-        {title} ({release_date.split("-")[0]})
-      </h1>
-      <img
-        src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-        alt={title}
-      />
-      <p>User Score: {(vote_average * 10).toFixed(0)}%</p>
-      <h2>Overview</h2>
-      <p>{overview}</p>
-      <h2>Genres</h2>
-      <p>{genreNames}</p>
-    </div>
+    <>
+      <button type="button" onClick={handleClickBack}>
+        Go back
+      </button>
+      <div>
+        <h1>
+          {title} ({release_date.split("-")[0]})
+        </h1>
+        <img
+          src={
+            backdrop_path
+              ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+              : defaultImg
+          }
+          alt={title}
+        />
+        <p>User Score: {(vote_average * 10).toFixed(0)}%</p>
+        <h2>Overview</h2>
+        <p>{overview}</p>
+        <h2>Genres</h2>
+        <p>{genreNames}</p>
+      </div>
+      <ul>
+        <li>
+          <NavLink to="casts">Casts</NavLink>
+        </li>
+        <li>
+          <NavLink to="reviews">Reviews</NavLink>
+        </li>
+      </ul>
+      <Outlet />
+    </>
   );
 };
 
