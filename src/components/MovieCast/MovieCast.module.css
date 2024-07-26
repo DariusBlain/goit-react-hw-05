@@ -1,0 +1,41 @@
+.container {
+  padding: 1rem;
+}
+
+.castList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.castItem {
+  flex: 1 1 calc(33% - 1rem);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #f9f9f9;
+  max-width: 200px;
+}
+
+.castImage {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.castInfo {
+  padding: 0.5rem;
+}
+
+.castName {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.castCharacter {
+  color: #555;
+}

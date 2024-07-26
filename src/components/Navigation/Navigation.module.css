@@ -1,21 +1,33 @@
+/* Navigation.module.css */
+
 .header {
-  background-color: rgb(161, 161, 255);
-  padding: 24px;
+  background-color: #333;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  gap: 24px;
 }
 
 .link {
-  color: azure;
-  font-weight: 700;
-  font-size: 24px;
+  color: #fff;
   text-decoration: none;
-  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+  transition: color 0.3s;
 }
 
 .active {
-  color: blue;
+  color: #f39c12;
+  font-weight: bold;
+}
+
+.link:hover {
+  color: #f39c12;
 }

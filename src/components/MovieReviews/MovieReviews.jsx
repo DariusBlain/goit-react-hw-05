@@ -1,41 +1,44 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMoviesByIdReviews } from "../../api";
+import s from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!movieId) return;
     const fetchData = async () => {
       try {
         const data = await fetchMoviesByIdReviews(movieId);
-        setMovie(data.results);
-        console.log(data);
+        setReviews(data.results);
       } catch (error) {
-        console.log(error);
+        setError("Failed to fetch reviews. Please try again later.");
       }
     };
     fetchData();
   }, [movieId]);
 
-  if (!movie) {
-    return <h2>Loading ...</h2>;
+  if (reviews.length === 0) {
+    return <h2>No reviews available.</h2>;
   }
 
   return (
-    <div>
-      <ul>
-        {movie.map((item) => {
-          return (
-            <li key={item.id}>
-              <h3>Author: {item.author}</h3>
-              <p>{item.content}</p>
+    <div className={s.container}>
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <ul className={s.reviewList}>
+          {reviews.map((item) => (
+            <li key={item.id} className={s.reviewItem}>
+              <h3 className={s.reviewAuthor}>Author: {item.author}</h3>
+              <p className={s.reviewContent}>{item.content}</p>
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

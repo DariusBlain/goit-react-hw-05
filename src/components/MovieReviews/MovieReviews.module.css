@@ -1,0 +1,27 @@
+.container {
+  padding: 1rem;
+}
+
+.reviewList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reviewItem {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.reviewAuthor {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.reviewContent {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
